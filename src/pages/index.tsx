@@ -1,7 +1,8 @@
 import * as React from "react";
+import { Row, Col } from "antd";
+import { HomeCarousel } from "../components/home-carousel/home-carousel.component"
+import "../styles/main.scss";
 
-// Please note that you can use https://github.com/dotansimha/graphql-code-generator
-// to generate all types from graphQL schema
 interface IndexPageProps {
   data: {
     site: {
@@ -28,31 +29,36 @@ export default class extends React.Component<IndexPageProps, {}> {
   }
   public render() {
     return(
-      <div>
-        <img src={this.props.data.contentfulAccueil.cover.file.url} />
-        <h1>{this.props.data.contentfulAccueil.accroche.accroche}</h1>
-        <p>This site is named <strong>{this.props.data.site.siteMetadata.siteName}</strong></p>
-      </div>
+      <Row>
+        <Col span={24}>
+          <div>
+            <img src={this.props.data.contentfulAccueil.cover.file.url} />
+            <h1>{this.props.data.contentfulAccueil.accroche.accroche}</h1>
+            <p>This site is named <strong>{this.props.data.site.siteMetadata.siteName}</strong></p>
+          </div>
+        </Col>
+      </Row>
+      
     );
   }
 }
 
 export const pageQuery = graphql`
-query IndexQuery{
-  site {
-    siteMetadata {
-      siteName
+  query IndexQuery{
+    site {
+      siteMetadata {
+        siteName
+      }
     }
-  }
-  contentfulAccueil {
-    accroche {
-      accroche
-    }
-    cover {
-      file {
-        url
+    contentfulAccueil {
+      accroche {
+        accroche
+      }
+      cover {
+        file {
+          url
+        }
       }
     }
   }
-}
 `;
